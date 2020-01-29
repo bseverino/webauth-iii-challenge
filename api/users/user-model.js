@@ -6,16 +6,20 @@ module.exports = {
     findBy
 }
 
+// takes username, password, and department
 function add(credentials) {
     return db('user')
         .insert(credentials)
 }
 
-function find() {
+// returns a list of users based on the client's department
+function find(department) {
     return db('user')
-        .select('id', 'username')
+        .where('department', department)
+        .select('id', 'username', 'department')
 }
 
+// finds user(s) based on argument, useful to find by id
 function findBy(filter) {
     return db('user')        
         .where(filter)

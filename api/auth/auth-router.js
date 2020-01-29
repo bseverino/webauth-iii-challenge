@@ -5,6 +5,7 @@ const generateToken = require('../middleware/generate-token.js')
 
 const Users = require('../users/user-model.js')
 
+// requires username, password, and department
 router.post('/register', (req, res) => {
     const user = req.body
     const hash = bc.hashSync(req.body.password, 8)
@@ -21,6 +22,7 @@ router.post('/register', (req, res) => {
         })
 })
 
+// requires username and password, generates a token for the client
 router.post('/login', (req, res) => {
     const { username, password } = req.body
 

@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken')
-const secrets = require('../config/secrets.js')
+const { jwtSecret } = require('../config/secrets.js')
 
 function checkToken(req, res, next) {
     const token = req.headers.authorization
 
-    jwt.verify(token, secrets.jwtSecret, err => {
+    jwt.verify(token, jwtSecret, (err, decoded) => {
         if (err) {
             console.log(err)
             res.status(401).json({ message: 'You must be logged in to do this.' })
         } else {
+            req.user = decoded
             next()
         }
     })
