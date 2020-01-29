@@ -6,7 +6,7 @@ const KnexSessionStore = require('connect-session-knex')(session)
 
 const logger = require('./logger.js')
 
-const dbConnection = require('../data/db-config.js')
+const dbConnection = require('../../data/db-config.js')
 
 const sessionConfig = {
   name: 'valid_session',
@@ -29,7 +29,7 @@ const sessionConfig = {
 
 module.exports = server => {
   server.use(helmet())
-  server.use(session(sessionConfig))
+  // server.use(session(sessionConfig))
   server.use(express.json())
   server.use(cors())
   server.use(logger)
