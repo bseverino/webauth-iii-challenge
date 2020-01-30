@@ -18,4 +18,18 @@ router.get('/', checkToken, (req, res) => {
         })
 })
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+
+    Users.remove(id)
+        .then(deleted => {
+            console.log(deleted)
+            res.status(200).json({ message: `User with the ID of ${id} successfully deleted.`})
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ message: 'Error deleting user.' })
+        })
+})
+
 module.exports = router

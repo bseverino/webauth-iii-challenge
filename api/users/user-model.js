@@ -3,7 +3,8 @@ const db = require('../../data/db-config.js')
 module.exports = {
     add,
     find,
-    findBy
+    findBy,
+    remove
 }
 
 // takes username, password, and department
@@ -23,4 +24,10 @@ function find(department) {
 function findBy(filter) {
     return db('user')        
         .where(filter)
+}
+
+function remove(id) {
+    return db('user')
+        .where('id', id)
+        .del()
 }
