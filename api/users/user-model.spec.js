@@ -22,4 +22,15 @@ describe('user model', () => {
             expect(users).toHaveLength(2)
         })
     })
+
+    describe('remove()', () => {
+        it('should remove the user from the db', async () => {
+            await Users.add({ username: 'Bianca', password: 'password', department: 'Backend' })
+            await Users.remove(1)
+
+            const users = await db('user')
+
+            expect(users).toHaveLength(0)
+        })
+    })
 })
